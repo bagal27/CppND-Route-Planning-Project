@@ -55,7 +55,29 @@ int main(int argc, const char **argv)
     // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
     // user input for these values using std::cin. Pass the user input to the
     // RoutePlanner object below in place of 10, 10, 90, 90.
-
+    float start_x, start_y, end_x, end_y; 
+    std::vector <std::string> coordinatelist {"starting point, x coordinate", "starting point, y coordinate",
+                                              "ending point, x coordinate", "ending point, y coordinate"};
+    // Loop until valid data
+    bool needvalue = true;
+    float value;
+    for (int i = 0; i < coordinatelist.size(); i++){
+        needvalue = true;
+        while (needvalue) {
+            std::cout << "Please enter the " << coordinatelist[i] << " (0-100): ";
+            std::cin >> value;
+            if (0 <= value <= 100) {
+                needvalue = false;
+                switch (i) {
+                    case 0: start_x = value;
+                    case 1: start_y = value;
+                    case 2: end_x = value;
+                    case 3: end_y = value;
+                }
+            }    
+        }
+    }    
+    
     // Build Model.
     RouteModel model{osm_data};
 
